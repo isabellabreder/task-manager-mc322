@@ -29,9 +29,8 @@ public class Tarefa implements Atividade {
         this.arquivo = arquivo;
         
         //adiciona a nova linha à tabela
-        Object[] novaLinha = {nome, categoria, observacoes, arquivo.getPath()};
+        Object[] novaLinha = {this.categoria, this.nome, this.observacoes, this.arquivo.getPath()};
         modelo.addRow(novaLinha);
-        
         //limpa os campos após adicionar
         home.clear();
     }
