@@ -1,4 +1,4 @@
-# task-manager-mc322
+# Gerenciador de Tarefas
 Projeto Final da disciplina de MC322, sendo um gerenciador de tarefas com algumas categorias para melhor organização.
 
 ## Participantes do grupo:
