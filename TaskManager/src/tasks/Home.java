@@ -1,9 +1,15 @@
 package tasks;
 
-import java.awt.Color;
+import static java.awt.Color.gray;
+import static java.awt.Color.white;
+import static java.awt.EventQueue.invokeLater;
 import java.io.File;
+import static java.lang.System.getProperty;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import static javax.swing.JFileChooser.APPROVE_OPTION;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
+import static javax.swing.JOptionPane.showConfirmDialog;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
@@ -33,8 +39,8 @@ public class Home extends javax.swing.JFrame {
         modelo = (DefaultTableModel) jTable1.getModel();
         jTable1.setRowHeight(30);
         jTable1.setShowGrid(true);
-        jTable1.setGridColor(Color.gray);
-        jTable1.setBackground(Color.white);
+        jTable1.setGridColor(gray);
+        jTable1.setBackground(white);
         
     }
     
@@ -49,11 +55,11 @@ public class Home extends javax.swing.JFrame {
     
     public boolean isEmpty(){
         if(jTextFieldNome.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "O nome da tarefa não pode estar vazio!");
+            showMessageDialog(this, "O nome da tarefa não pode estar vazio!");
             return false;
         }
         if(jTextFieldObs.getText().isEmpty()){
-            JOptionPane.showMessageDialog(this, "O campo observações da tarefa não pode estar vazio!");
+            showMessageDialog(this, "O campo observações da tarefa não pode estar vazio!");
             return false;
         }
         if (jLabelArq.getText().isEmpty()){
@@ -479,17 +485,17 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
-        JFileChooser file = new JFileChooser();
-        file.setCurrentDirectory(new File(System.getProperty("user.home")));
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Documentos(*.pdf, *.docx, *.doc, *.txt", "pdf", "docx", "doc", "txt");
+        var file = new JFileChooser();
+        file.setCurrentDirectory(new File(getProperty("user.home")));
+        var filter = new FileNameExtensionFilter("Documentos(*.pdf, *.docx, *.doc, *.txt", "pdf", "docx", "doc", "txt");
         file.addChoosableFileFilter(filter);
-        int result = file.showOpenDialog(this);
-        if (result == JFileChooser.APPROVE_OPTION){
+        var result = file.showOpenDialog(this);
+        if (result == APPROVE_OPTION){
             selected = file.getSelectedFile();
             jLabelArq.setText(selected.getName());
         } else {
             selected = null;
-            JOptionPane.showMessageDialog(this, "Nenhum documento selecionado");
+            showMessageDialog(this, "Nenhum documento selecionado");
         }
     }//GEN-LAST:event_jButtonBrowseActionPerformed
 
@@ -510,7 +516,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButtonExcluirActionPerformed
 
     private void jToggleButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonSairActionPerformed
-        int op = JOptionPane.showConfirmDialog(this, "Deseja sair?", "Select", JOptionPane.YES_NO_OPTION);
+        var op = showConfirmDialog(this, "Deseja sair?", "Select", YES_NO_OPTION);
         if (op == 0){
             this.dispose();
         }
@@ -521,10 +527,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
     public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Home().setVisible(true);
-            }
+        invokeLater(() -> {
+            new Home().setVisible(true);
         });
     }
 

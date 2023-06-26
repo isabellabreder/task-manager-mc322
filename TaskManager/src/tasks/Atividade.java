@@ -1,7 +1,5 @@
 package tasks;
 
-import java.io.File;
-
 /**
  *
  * @author isabellabreder
