@@ -9,7 +9,7 @@ import com.google.gson.GsonBuilder;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import javax.swing.JTable;
 
 /**
  *
@@ -18,10 +18,10 @@ import java.util.ArrayList;
 public class GerenciaJSON {
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     
-    public int ExportaTarefas(ListaDeTarefas lista, String endereco) {
+    public int ExportaTarefas(JTable tarefas, String endereco) {
         try (var escritor = new FileWriter(endereco)) {
             
-            gson.toJson(lista, escritor);
+            gson.toJson(tarefas, escritor);
             return 0;
         } 
         catch (IOException e) {
@@ -30,8 +30,8 @@ public class GerenciaJSON {
         }
     }
     
-    public ArrayList<TarefaEspecifica> ImportaTarefas(String endereco) {
-        ArrayList<TarefaEspecifica> tarefas = new ArrayList<>();
+    public JTable ImportaTarefas(String endereco) {
+        JTable tarefas = new JTable();
         try (var leitor = new FileReader(endereco)) {
             tarefas = gson.fromJson(leitor, tarefas.getClass());
             return tarefas;

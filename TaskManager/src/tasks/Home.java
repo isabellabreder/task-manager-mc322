@@ -3,6 +3,7 @@ package tasks;
 import static java.awt.Color.gray;
 import static java.awt.Color.white;
 import static java.awt.EventQueue.invokeLater;
+import java.awt.HeadlessException;
 import java.io.File;
 import static java.lang.System.getProperty;
 import javax.swing.JFileChooser;
@@ -487,15 +488,23 @@ public class Home extends javax.swing.JFrame {
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
         var file = new JFileChooser();
         file.setCurrentDirectory(new File(getProperty("user.home")));
-        var filter = new FileNameExtensionFilter("Documentos(*.pdf, *.docx, *.doc, *.txt", "pdf", "docx", "doc", "txt");
+        var filter = new FileNameExtensionFilter(
+                "Documentos(*.pdf, *.docx, *.doc, *.txt",
+                "pdf","docx","doc","txt");
         file.addChoosableFileFilter(filter);
-        var result = file.showOpenDialog(this);
-        if (result == APPROVE_OPTION){
-            selected = file.getSelectedFile();
-            jLabelArq.setText(selected.getName());
-        } else {
-            selected = null;
-            showMessageDialog(this, "Nenhum documento selecionado");
+        try {
+            var result = file.showOpenDialog(this);
+            if (result == APPROVE_OPTION){
+                selected = file.getSelectedFile();
+                jLabelArq.setText(selected.getName());
+            } else {
+                selected = null;
+                showMessageDialog(this, "Nenhum documento selecionado");
+            }
+            
+        }
+        catch (HeadlessException e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_jButtonBrowseActionPerformed
 
