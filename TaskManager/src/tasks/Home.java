@@ -4,7 +4,7 @@ import static java.awt.Color.gray;
 import static java.awt.Color.white;
 import static java.awt.EventQueue.invokeLater;
 import java.awt.HeadlessException;
-import java.io.File;
+
 import static java.lang.System.getProperty;
 import javax.swing.JFileChooser;
 import static javax.swing.JFileChooser.APPROVE_OPTION;
@@ -13,7 +13,14 @@ import static javax.swing.JOptionPane.showConfirmDialog;
 import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
+import javax.swing.DefaultRowSorter;
+import javax.swing.JFileChooser;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 
 /**
  *
@@ -484,7 +491,26 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextFieldObsActionPerformed
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
-        // TODO add your handling code here:
+    String categoriaFiltro = (String) jComboBoxFiltro.getSelectedItem(); 
+
+        // Cria um filtro para exibir apenas as linhas com a categoria selecionada
+        RowFilter<DefaultTableModel, Object> filtro = new RowFilter<DefaultTableModel, Object>() {
+
+            @Override
+            public boolean include(RowFilter.Entry<? extends DefaultTableModel, ? extends Object> entry) {
+                // Obtém o valor da coluna "categoria" da entrada (linha) atual
+                Object categoria = entry.getValue(jTable1.getColumnModel().getColumnIndex("categoria"));
+
+                // Verifica se o valor da categoria é igual à categoria do filtro
+                return categoria.equals(categoriaFiltro);
+            }
+        };
+
+        // Obtém o modelo de classificação da tabela
+        DefaultRowSorter<DefaultTableModel, Object> sorter = (DefaultRowSorter<DefaultTableModel, Object>) jTable1.getRowSorter();
+
+        // Define o filtro para o modelo de classificação
+        sorter.setRowFilter(filtro);
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBrowseActionPerformed
