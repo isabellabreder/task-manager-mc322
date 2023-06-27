@@ -4,9 +4,8 @@ import static java.awt.Color.gray;
 import static java.awt.Color.white;
 import static java.awt.EventQueue.invokeLater;
 import java.awt.HeadlessException;
-import java.io.File;
+
 import static java.lang.System.getProperty;
-import javax.swing.JFileChooser;
 import static javax.swing.JFileChooser.APPROVE_OPTION;
 import static javax.swing.JOptionPane.YES_NO_OPTION;
 import static javax.swing.JOptionPane.showConfirmDialog;
@@ -19,7 +18,6 @@ import javax.swing.JFileChooser;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 
 /**
@@ -39,6 +37,7 @@ public class Home extends javax.swing.JFrame {
         initComponents();
         init();
         criaListas();
+        TableModel model = jTable1.getModel();
     }
     
     public JTable getTable(){
@@ -85,13 +84,13 @@ public class Home extends javax.swing.JFrame {
     }
     
     private void criaListas(){
-        ListaTrabalho listaTrabalho = new ListaTrabalho();
+        this.listaTrabalho = new ListaTrabalho();
             listaTrabalho.setQuantidade(0);
-        ListaFaculdade listaFaculdade = new ListaFaculdade();
+        this.listaFaculdade = new ListaFaculdade();
             listaFaculdade.setQuantidade(0);
-        ListaPessoal listaPessoal = new ListaPessoal();
+        this.listaPessoal = new ListaPessoal();
             listaPessoal.setQuantidade(0);
-        ListaSaude listaSaude = new ListaSaude();
+        this.listaSaude = new ListaSaude();
             listaSaude.setQuantidade(0);
     }
     
@@ -601,23 +600,26 @@ public class Home extends javax.swing.JFrame {
             } else {
                 this.listaPessoal.adicionarAtividade(tarefaEspecifica);
             }
-            
->>>>>>> 99395aa... listas de tarefas
         }
     }//GEN-LAST:event_jToggleButtonAddNewActionPerformed
 
     private void jToggleButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonExcluirActionPerformed
         Tarefa tarefa = new Tarefa(modelo, this);
         tarefa.removerAtividade();        
-        if(tarefa.removerAtividade().equals("Trabalho")){
+        switch (tarefa.removerAtividade()) {
+            case "Trabalho":
                 this.listaTrabalho.removerAtividade();
-            } else if(tarefa.removerAtividade().equals("Saúde")){
+                break;
+            case "Saúde":
                 this.listaSaude.removerAtividade();
-            } else if(tarefa.removerAtividade().equals("Faculdade")){
+                break;
+            case "Faculdade":
                 this.listaFaculdade.removerAtividade();
-            } else {
+                break;
+            default:
                 this.listaPessoal.removerAtividade();
-            }
+                break;
+        }
         
     }//GEN-LAST:event_jToggleButtonExcluirActionPerformed
 

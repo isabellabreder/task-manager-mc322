@@ -23,6 +23,10 @@ public class NovaTarefa extends TarefaEspecifica{
         this.observacoes = observacoes;
         this.arquivo = arquivo;
     }
+
+    NovaTarefa(String nome, String categoria, String observacoes) {
+        this(nome, categoria, observacoes, null);
+    }
      
     @Override
      public String getNome(){
