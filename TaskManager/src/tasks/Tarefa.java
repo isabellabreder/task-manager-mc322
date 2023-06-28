@@ -35,6 +35,18 @@ public class Tarefa implements Atividade {
         home.clear();
     }
     
+    public void adicionarAtividade(String nome, String categoria, String observacoes){
+        this.nome = nome;
+        this.categoria = categoria;
+        this.observacoes = observacoes;
+        
+        //adiciona a nova linha à tabela
+        Object[] novaLinha = {this.categoria, this.nome, this.observacoes};
+        modelo.addRow(novaLinha);
+        //limpa os campos após adicionar
+        home.clear();
+    }
+    
     @Override
     public void removerAtividade(){
         int indexLinha = home.getTable().getSelectedRow();

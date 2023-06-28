@@ -63,9 +63,11 @@ public class Home extends javax.swing.JFrame {
             showMessageDialog(this, "O campo observações da tarefa não pode estar vazio!");
             return false;
         }
+        /*
+        // trecho para tratamento
         if (jLabelArq.getText().isEmpty()){
            //adicionar um tratamento de exceção aqui, pro upload de arquivo não ser obrigatório
-        }
+        }*/
         return true;
     }
     
@@ -515,7 +517,10 @@ public class Home extends javax.swing.JFrame {
             String categoria = jComboBoxAdd.getSelectedItem().toString();
             
             Tarefa tarefa = new Tarefa(modelo, this);
-            tarefa.adicionarAtividade(nome, categoria, obs, selected);
+            if (selected != null)
+                tarefa.adicionarAtividade(nome, categoria, obs, selected);
+            else
+                tarefa.adicionarAtividade(nome, categoria, obs);
         }
     }//GEN-LAST:event_jToggleButtonAddNewActionPerformed
 

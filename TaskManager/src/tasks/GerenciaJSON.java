@@ -35,7 +35,7 @@ public class GerenciaJSON {
         try (var leitor = new FileReader(endereco)) {
             tarefas = gson.fromJson(leitor, tarefas.getClass());
             return tarefas;
-        } 
+        }
         catch (IOException e) {
             e.printStackTrace();
             return null;
